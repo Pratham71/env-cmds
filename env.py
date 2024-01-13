@@ -92,7 +92,7 @@ def add_env_var(env_path:str,**env_var:dict[str,str])->None:
             dotenv.set_key(env_path,key_to_set=key,value_to_set=env_var[key])
     except FileExistsError:
         cd(env_path)
-        logging.error(" File Does Not Exists!\n[#]Creating .env file in the specified path[#]")
+        logging.error(f" {TextFormatter.rgb(255,0,0)}File Does Not Exists!\n[#]Creating .env file in the specified path[#]{TextFormatter.RESET}")
         with open(".env","x") as f:
             pass
     except Exception as error:
@@ -111,7 +111,7 @@ def remove_env_var(env_path:str,env_var:str)->None:
         dotenv.unset_key(env_path,env_var)
     except FileExistsError:
         cd(env_path)
-        logging.error(" File Does Not Exists!\n[#]Creating .env file in the specified path[#]")
+        logging.error(f" {TextFormatter.rgb(255,0,0)}File Does Not Exists!\n[#]Creating .env file in the specified path[#]")
         with open(".env","x") as f:
             pass
     except Exception as error:
@@ -138,7 +138,7 @@ def view_env_var(env_path:str,limit:int=15)->None:
         
     except FileExistsError:
         cd(env_path)
-        logging.error(" File Does Not Exists!\n[#]Creating .env file in the specified path[#]")
+        logging.error(f" {TextFormatter.rgb(255,0,0)}File Does Not Exists!\n[#]Creating .env file in the specified path[#]")
         with open(".env","x") as f:
             pass
     except Exception as error:
