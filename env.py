@@ -17,14 +17,8 @@ class TextFormatter:
    UNDERLINE = '\033[4m'
    RESET = END = '\033[0m'
 
-class CustomColor:
-    def __init__(self,r:int,g:int,b:int):
-        self.r = r
-        self.g = g
-        self.b = b
-    
-    def rgb(self)->str:
-        return f'\u001b[38;2;{self.r};{self.g};{self.b}m'
+   def rgb(r:int=0,g:int=0,b:int=0)->str:
+        return f'\u001b[38;2;{r};{g};{b}m'
     
 logging.basicConfig(level=logging.INFO,format=TextFormatter.GREEN+"[%(asctime)s][%(levelname)s][ProcID:%(process)d][filename-->%(filename)s line no-->%(lineno)s] >>>>>> "+TextFormatter.RESET+"%(message)s ")
 
@@ -36,7 +30,7 @@ def ls(dir:str)->list[str]:
             dir_list.append(dir)
         return dir_list
     except Exception as error:
-        logging.error(f" {CustomColor(255,0,0).rgb()}{error}{TextFormatter.RESET}")
+        logging.error(f" {TextFormatter.rgb(250,0,0)}{error}{TextFormatter.RESET}")
     finally:
         return None
 
@@ -49,7 +43,7 @@ def Cat(filename:str)->None:
             data=Read(FileObj=fileobj)
             logging.info(data)
     except Exception as error:
-        logging.error(f" {CustomColor(255,0,0).rgb()}{error}{TextFormatter.RESET}")
+        logging.error(f" {TextFormatter.rgb(250,0,0)}{error}{TextFormatter.RESET}")
     finally:
         return None
 
@@ -57,7 +51,7 @@ def cd(dir:str)->None:
     try:
         chdir(dir)
     except Exception as error:
-        logging.error(f" {CustomColor(255,0,0).rgb()}{error}{TextFormatter.RESET}")
+        logging.error(f" {TextFormatter.rgb(250,0,0)}{error}{TextFormatter.RESET}")
     finally:
         return None
 
@@ -83,7 +77,7 @@ def get_env_var(env_path:str,env_var:str)->str|None:
         dotenv.load_dotenv(env_path)
         return os.getenv(env_var)
     except Exception as error:
-        logging.error(f" {CustomColor(255,0,0).rgb()}{error}{TextFormatter.RESET}")
+        logging.error(f" {TextFormatter.rgb(250,0,0)}{error}{TextFormatter.RESET}")
     finally:
         return None
 
@@ -102,7 +96,7 @@ def add_env_var(env_path:str,**env_var:dict[str,str])->None:
         with open(".env","x") as f:
             pass
     except Exception as error:
-        logging.error(f' {CustomColor(255,0,0).rgb()}{error}{TextFormatter.RESET}')
+        logging.error(f' {TextFormatter.rgb(250,0,0)}{error}{TextFormatter.RESET}')
     else:
         logging.info(" Entered all the keys:values in .env file!")
     finally:
@@ -121,7 +115,7 @@ def remove_env_var(env_path:str,env_var:str)->None:
         with open(".env","x") as f:
             pass
     except Exception as error:
-        logging.error(f' {CustomColor(255,0,0).rgb()}{error}{TextFormatter.RESET}')
+        logging.error(f' {TextFormatter.rgb(250,0,0)}{error}{TextFormatter.RESET}')
     else:
         logging.info(f" '{env_var}' has been removed from .env file!")
     finally:
@@ -148,7 +142,7 @@ def view_env_var(env_path:str,limit:int=15)->None:
         with open(".env","x") as f:
             pass
     except Exception as error:
-        logging.error(f' {CustomColor(255,0,0).rgb()}{error}{TextFormatter.RESET}')
+        logging.error(f' {TextFormatter.rgb(250,0,0)}{error}{TextFormatter.RESET}')
     finally:
         return None
 
@@ -176,7 +170,7 @@ def copy_env(env_path:str,copy_env_path:str)->None:
                 for line in env1.readlines():
                     env2.write(line)
     except Exception as error:
-        logging.error(f' {CustomColor(255,0,0).rgb()}{error}{TextFormatter.RESET}')
+        logging.error(f' {TextFormatter.rgb(250,0,0)}{error}{TextFormatter.RESET}')
     finally:
         return None
 
@@ -189,7 +183,7 @@ def transfer(path:str,dest_path:str)->None:
     try:
         move(path,dest_path)
     except Exception as error:
-        logging.error(f" {CustomColor(255,0,0).rgb()}{error}{TextFormatter.RESET}")
+        logging.error(f" {TextFormatter.rgb(250,0,0)}{error}{TextFormatter.RESET}")
     else:
         logging.info(f" Moved from {path} ---> {dest_path}")
     finally:
@@ -200,7 +194,7 @@ def delete_file(path:str)->bool:
     try:
         os.remove(path)
     except Exception as error:
-        logging.error(f" {CustomColor(255,0,0).rgb()}{error}{TextFormatter.RESET}")
+        logging.error(f" {TextFormatter.rgb(250,0,0)}{error}{TextFormatter.RESET}")
         return False
     else:
         return True
@@ -216,7 +210,7 @@ def clear_env(env_path:str)->None:
         with open(env_path,"w") as fileobj:
             fileobj.write("")
     except Exception as error:
-        logging.error(f' {CustomColor(255,0,0).rgb()}{error}{TextFormatter.RESET}')
+        logging.error(f' {TextFormatter.rgb(250,0,0)}{error}{TextFormatter.RESET}')
     else:
         logging.info(f"Cleared .env file in '{env_path}'")
 
@@ -233,6 +227,6 @@ def create_env(dir:str|None=None)->None:
                 logging.info(f" Created a .env file in '{get_current_dir()}'")
             cd(current_dir)
     except Exception as error:
-        logging.error(f" {CustomColor(255,0,0).rgb()}{error}{TextFormatter.RESET}")
+        logging.error(f" {TextFormatter.rgb(250,0,0)}{error}{TextFormatter.RESET}")
     finally:
         return None
