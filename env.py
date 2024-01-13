@@ -200,8 +200,7 @@ def delete_file(path:str)->bool:
         return True
 
 def get_current_dir()->str:
-    """Returns the current directory that python is in. (str)
-    ~~~~"""
+    """Returns the current working directory."""
     return os.getcwd()
 
 def clear_env(env_path:str)->None:
